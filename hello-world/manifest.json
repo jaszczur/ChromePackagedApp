@@ -1,12 +1,14 @@
 {
-  "name": "My First Extension",
-  "version": "1.0",
-  "description": "The first extension that I made.",
-  "browser_action": {
-    "default_icon": "icon.png"
+  "name": "WelcomeR",
+  "description": "It's just what it says",
+  "version": "1",
+  "app": {
+    "launch": {
+      "local_path": "main.html"
+    }
   },
-  "permissions": [
-    "http://api.flickr.com/"
-  ]
+  "icons": {
+    "16": "icon_16.png",
+    "128": "icon_128.png"
+  }
 }
-
