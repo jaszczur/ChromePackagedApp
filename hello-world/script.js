@@ -29,17 +29,26 @@ Position.prototype = {
     _setCoordinates: function(position) {
         this._coordinates = position.coords;
         this._updatePlaceName();
-    }
+    },
     
+    
+    askForGeolocationType: function(info, tab) {
+        this.GEOLOCATION_RESULTS_POSITION = prompt("GEOLOCATION_RESULTS_POSITION", this.GEOLOCATION_RESULTS_POSITION);
+        this._updatePlaceName();
+    }
 };
 
 
 document.observe("dom:loaded", function() {
     var position = new Position();
+    
+    chrome.contextMenus.removeAll();
+    var child1 = chrome.contextMenus.create(
+        {"title": "Change location type", "onclick": position.askForGeolocationType.bind(position)});
 
     $('button').observe("click", function(event) {
         $('place').update(position.placeName);
-        $('welcomeMessage').toggle()
+        $('welcomeMessage').toggle();
     });
 });
 
