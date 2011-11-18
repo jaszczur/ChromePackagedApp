@@ -3,25 +3,27 @@ body {
 }
 
 #button {
-    width: 300px;
+    width: 340px;
     padding: 50px;
     
+    background-color: #06D;
+    color: #EEE;
     text-align: center;
-    background-color: #EEE;
     border-radius: 15px;
     cursor: pointer;
 }
 
 #welcomeMessage {
     position: relative;
-    top: -20px;
+    top: -40px;
     width: 300px;
     padding: 50px;
+    margin-left: 20px;
 
+    background-color: #EEE;
     text-align: center;
-    background-color: #06D;
     border-radius: 15px;
-    color: #EEE;
+    opacity: 0.0;
 }
 
 #place {

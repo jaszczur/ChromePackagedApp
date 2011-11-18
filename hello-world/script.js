@@ -47,6 +47,7 @@ document.observe("dom:loaded", function() {
     };
 
     var position = new Position(placeChanged);
+    var visible = false;
     
     // setup context menu
     try {
@@ -61,7 +62,23 @@ document.observe("dom:loaded", function() {
 
     // user event handlers
     $('button').observe("click", function(event) {
-        $('welcomeMessage').toggle();
+        if (!visible) {
+            $('welcomeMessage').show();
+            new Effect.Morph('welcomeMessage', {
+                style: "opacity: 0.999; top: -20px",
+                duration: 0.5
+            });
+        } else {
+            new Effect.Morph('welcomeMessage', {
+                style: "opacity: 0.0; top: -40px",
+                duration: 0.5
+            }, {
+                afterFinish: function(eff) {
+                    $('welcomeMessage').hide();
+                }
+            });
+        }
+        visible = !visible;
     });
 });
 
