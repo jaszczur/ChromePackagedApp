@@ -49,13 +49,15 @@ document.observe("dom:loaded", function() {
     var position = new Position(placeChanged);
     
     // setup context menu
-    (function() {
+    try {
         chrome.contextMenus.removeAll();
         var child1 = chrome.contextMenus.create({
             "title": "Change location type",
             "onclick": position.askForGeolocationType.bind(position)
         });
-    })();
+    } catch (ex) {
+        console.log("We don't have permissions to setup context menus");
+    }
 
     // user event handlers
     $('button').observe("click", function(event) {
