@@ -1,5 +1,6 @@
 
-var Position = function() {
+var Position = function(locationChangedCallback) {
+    this._locationChangedCallback = locationChangedCallback;
     this._coordinates = null;
     this._geocoder = new google.maps.Geocoder();
     this.placeName = null;
@@ -19,6 +20,7 @@ Position.prototype = {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[this.GEOLOCATION_RESULTS_POSITION]) {
                     this.placeName = results[this.GEOLOCATION_RESULTS_POSITION].formatted_address
+                    this._locationChangedCallback(this.placeName);
                 }
             } else {
                 log.console("Geocoder failed due to: " + status);
@@ -40,14 +42,23 @@ Position.prototype = {
 
 
 document.observe("dom:loaded", function() {
-    var position = new Position();
-    
-    chrome.contextMenus.removeAll();
-    var child1 = chrome.contextMenus.create(
-        {"title": "Change location type", "onclick": position.askForGeolocationType.bind(position)});
+    var placeChanged = function(newPlace) {   
+        $('place').update(newPlace);
+    };
 
+    var position = new Position(placeChanged);
+    
+    // setup context menu
+    (function() {
+        chrome.contextMenus.removeAll();
+        var child1 = chrome.contextMenus.create({
+            "title": "Change location type",
+            "onclick": position.askForGeolocationType.bind(position)
+        });
+    })();
+
+    // user event handlers
     $('button').observe("click", function(event) {
-        $('place').update(position.placeName);
         $('welcomeMessage').toggle();
     });
 });
