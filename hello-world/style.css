@@ -2,16 +2,6 @@ body {
     margin: 50px;
 }
 
-#welcomeMessage {
-    position: relative;
-    top: -20px;
-    width: 300px;
-    padding: 50px;
-
-    background-color: #06D;
-    border-radius: 15px;
-}
-
 #button {
     width: 300px;
     padding: 50px;
@@ -22,4 +12,19 @@ body {
     cursor: pointer;
 }
 
+#welcomeMessage {
+    position: relative;
+    top: -20px;
+    width: 300px;
+    padding: 50px;
+
+    text-align: center;
+    background-color: #06D;
+    border-radius: 15px;
+    color: #EEE;
+}
+
+#place {
+    font-style: italic;
+}
 
