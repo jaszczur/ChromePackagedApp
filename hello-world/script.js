@@ -1,6 +1,3 @@
-
-
-
 document.observe("dom:loaded", function() {
     var placeChanged = function(newPlace) {   
         $('place').update(newPlace);
